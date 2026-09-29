@@ -5,7 +5,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './styles.css';
 
-const API='http://localhost:5000/api';
+const API='https://resqgrid-backend-4u89.onrender.com/api';
 const pin=new L.Icon({iconUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',iconRetinaUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',shadowUrl:'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',iconSize:[25,41],iconAnchor:[12,41]});
 async function api(path,opt={}){const t=localStorage.getItem('rq_token');const headers={...(opt.headers||{}),...(t?{Authorization:`Bearer ${t}`}:{})};const r=await fetch(API+path,{...opt,headers});let j={};try{j=await r.json()}catch{}if(!r.ok)throw Error(j.error||'Request failed');return j}
 function LocationPicker({setLoc}){useMapEvents({click:e=>setLoc({lat:e.latlng.lat,lng:e.latlng.lng})});return null}
